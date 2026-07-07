@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 3 — The Final Sweep | Year 6 Spelling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf9f4; --ink:#1b2a4a; --amber:#e8930c; --teal:#0e7c7b; --card:#fff;
+    --line:#e6e1d6; --amber-soft:#fdf0d9; --amber-edge:#f2c785; --teal-soft:#e1efee;
+    --ink-soft:#56607a; --good:#1f7a4d; --good-soft:#e3f3ea; --bad:#c0392b; --bad-soft:#fdeceb;
+    --shadow:0 2px 5px rgba(27,42,74,.06), 0 10px 28px rgba(27,42,74,.06); --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:"Atkinson Hyperlegible",system-ui,sans-serif; font-size:18px; line-height:1.55; -webkit-text-size-adjust:100%}
+  h1,h2,h3,.eyebrow,.pill,.timer,.token,.testword,.chip{font-family:"Space Grotesk",system-ui,sans-serif}
+  h2{font-size:1.5rem; margin:0 0 .2em; letter-spacing:-.01em}
+  h3{font-size:1.12rem; margin:0 0 .35em}
+  p{margin:.4em 0}
+  kbd{font-family:"Space Grotesk"; background:#eee7d8; border:1px solid #d8cfba; border-radius:5px; padding:1px 6px; font-size:.85em}
+  :focus-visible{outline:3px solid var(--amber); outline-offset:2px; border-radius:6px}
+
+  header.band{background:var(--ink); color:#fff; padding:30px 22px 26px}
+  .band-inner{max-width:1000px; margin:0 auto}
+  .eyebrow{text-transform:uppercase; letter-spacing:.16em; font-size:.72rem; font-weight:600; color:var(--amber); margin:0 0 8px}
+  .band h1{font-weight:700; font-size:2.4rem; line-height:1.05; margin:0 0 10px; letter-spacing:-.02em}
+  .hook{color:#c9d2e6; font-size:1.05rem; margin:0; max-width:62ch}
+  .meta-row{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px}
+  .meta-row span{background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); padding:5px 11px; border-radius:999px; font-size:.78rem; color:#dde3f1}
+
+  nav.pills{position:sticky; top:0; z-index:40; background:rgba(251,249,244,.93); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); padding:9px 12px}
+  .pills-inner{max-width:1000px; margin:0 auto; display:flex; gap:7px; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .pill{flex:0 0 auto; border:1px solid var(--line); background:#fff; color:var(--ink); padding:8px 13px; border-radius:999px; font-size:.82rem; font-weight:500; cursor:pointer; text-decoration:none; min-height:40px; display:inline-flex; align-items:center}
+  .pill:hover{border-color:var(--teal); color:var(--teal)}
+
+  main{max-width:1000px; margin:0 auto; padding:8px 18px 60px}
+  section{scroll-margin-top:64px; padding:30px 0 6px; border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .sec-head{display:flex; align-items:baseline; gap:12px; margin-bottom:14px}
+  .sec-no{font-weight:700; color:var(--amber); font-size:.95rem; border:2px solid var(--amber-edge); border-radius:8px; padding:2px 9px; flex:0 0 auto; font-family:"Space Grotesk"}
+  .lead{color:var(--ink-soft); max-width:66ch}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin:14px 0}
+
+  button{font-family:inherit}
+  .btn{background:var(--ink); color:#fff; border:none; border-radius:10px; padding:11px 18px; font-size:.95rem; font-weight:700; cursor:pointer; min-height:44px; font-family:"Space Grotesk"}
+  .btn:hover{background:#243a63}
+  .btn.ghost{background:#fff; color:var(--ink); border:1.5px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--teal); color:var(--teal)}
+  .btn.amber{background:var(--amber); color:#3a2400}
+  .btn.amber:hover{background:#d98509}
+  .btn:disabled{opacity:.45; cursor:not-allowed}
+
+  /* teaching cards */
+  .teach-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  @media(max-width:760px){.teach-grid{grid-template-columns:1fr}}
+  .remember{background:var(--teal-soft); border:1px solid #bfdedc; border-radius:10px; padding:10px 13px; font-size:.9rem; margin-top:8px}
+  .remember b{color:var(--teal); font-family:"Space Grotesk"}
+  .teach .svg-wrap{background:#fbfaf6; border:1px solid var(--line); border-radius:12px; padding:12px; margin:.3em 0 .6em}
+
+  /* memory sprint */
+  .sprint-top{display:flex; align-items:center; gap:18px; flex-wrap:wrap}
+  .timer{font-weight:700; font-size:3rem; font-family:"Space Grotesk"; min-width:90px; color:var(--ink)}
+  .timer.low{color:var(--bad)}
+  .sprint-bar{flex:1 1 200px; height:12px; background:#ece7dc; border-radius:999px; overflow:hidden; min-width:160px}
+  .sprint-fill{height:100%; width:100%; background:var(--teal); transition:width 1s linear}
+  textarea{width:100%; min-height:90px; border:1.5px solid var(--line); border-radius:12px; padding:13px; font-family:"Atkinson Hyperlegible"; font-size:1rem; resize:vertical; background:#fff; color:var(--ink)}
+  textarea:disabled{background:#f6f4ee}
+  .recall-grid{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+  .recall-chip{display:inline-flex; align-items:center; gap:8px; border:1.5px solid var(--line); border-radius:10px; padding:8px 12px; background:#fff; cursor:pointer; min-height:44px; font-family:"Space Grotesk"; font-weight:600}
+  .recall-chip[aria-pressed=true]{background:var(--good-soft); border-color:var(--good); color:var(--good)}
+  .recall-chip .box{width:18px; height:18px; border:2px solid var(--line); border-radius:4px; flex:0 0 auto}
+  .recall-chip[aria-pressed=true] .box{background:var(--good); border-color:var(--good)}
+
+  /* error detective */
+  .passage{font-size:1.12rem; line-height:2; background:#fbfaf6; border:1px solid var(--line); border-radius:12px; padding:18px}
+  .token{border:none; background:transparent; font-size:1.05rem; padding:2px 3px; border-radius:6px; cursor:pointer; color:var(--ink); font-family:inherit}
+  .token:hover{background:#f0ece1}
+  .token.flag{background:#fff; box-shadow:0 0 0 2px var(--ink) inset}
+  .token.err{background:var(--bad-soft); color:var(--bad); text-decoration:line-through; box-shadow:none}
+  .token.fixed{background:var(--good-soft); color:var(--good); text-decoration:none; box-shadow:none; font-weight:700}
+  .corrections{margin-top:12px; display:none}
+  .corrections.show{display:block}
+  .corr-item{display:inline-block; background:var(--good-soft); border:1px solid #bfdedc; border-radius:999px; padding:5px 12px; margin:4px 6px 0 0; font-family:"Space Grotesk"; font-weight:600}
+  .corr-item s{color:var(--bad); font-weight:400}
+
+  /* build the scene */
+  .scene-tracker{display:flex; flex-wrap:wrap; gap:7px; margin:.5em 0}
+  .chip{font-size:.85rem; border:1.5px solid var(--line); border-radius:999px; padding:6px 12px; background:#fff; color:var(--ink-soft); font-weight:600}
+  .chip.used{background:var(--good-soft); border-color:var(--good); color:var(--good)}
+  .scene-count{font-family:"Space Grotesk"; font-weight:700}
+  .scene-count.met{color:var(--good)}
+  .help-box{display:none; margin-top:12px; background:var(--teal-soft); border:1px solid #bfdedc; border-radius:12px; padding:14px}
+  .help-box.show{display:block}
+  .locked{border:1.5px dashed var(--amber-edge); background:var(--amber-soft); border-radius:12px; padding:13px; margin-top:12px; text-align:center; color:#7a4a06}
+  .reveal-box{display:none; margin-top:12px}
+  .reveal-box.show{display:block}
+
+  /* weekly test */
+  .test-stats{display:flex; gap:20px; align-items:center; flex-wrap:wrap; font-family:"Space Grotesk"; font-weight:600; margin-bottom:8px}
+  .test-stats .lab{font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); display:block}
+  .test-stats .big{font-size:1.5rem; line-height:1}
+  .progress-track{height:10px; background:#ece7dc; border-radius:999px; overflow:hidden; flex:1 1 160px; min-width:140px}
+  .progress-fill{height:100%; background:var(--teal); width:0%; transition:width .25s}
+  .test-card{background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:22px; box-shadow:var(--shadow)}
+  .test-sentence{font-size:1.25rem; line-height:1.7}
+  .test-blank{display:inline-block; min-width:120px; border-bottom:3px solid var(--amber); margin:0 4px}
+  .test-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+  .test-input{flex:1 1 220px; min-width:180px; border:1.5px solid var(--line); border-radius:10px; padding:12px 14px; font-family:"Atkinson Hyperlegible"; font-size:1.1rem; background:#fff; color:var(--ink)}
+  .test-fb{margin-top:12px; font-weight:700; font-family:"Space Grotesk"; min-height:1.3em}
+  .test-fb.good{color:var(--good)} .test-fb.bad{color:var(--bad)}
+  .report{text-align:center; padding:8px}
+  .report .big{font-family:"Space Grotesk"; font-weight:700; font-size:2.8rem; color:var(--teal)}
+  .report ul{display:inline-block; text-align:left; margin-top:8px}
+
+  /* evidence + checklist */
+  .evidence{display:flex; gap:12px; align-items:flex-start; background:#fff7e9; border:1.5px solid var(--amber-edge); border-radius:12px; padding:13px 15px; margin:14px 0; font-size:.92rem}
+  .evidence svg{flex:0 0 auto; margin-top:2px}
+  .evidence b{color:#a8540b}
+  .check-list{list-style:none; padding:0; margin:.4em 0}
+  .check-list li{display:flex; gap:11px; align-items:flex-start; padding:9px 0; border-bottom:1px dashed var(--line)}
+  .check-list input{width:24px; height:24px; margin-top:2px; accent-color:var(--teal); flex:0 0 auto}
+  .confi{display:flex; gap:9px; flex-wrap:wrap; margin-top:10px}
+  .confi button{border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; min-height:44px; cursor:pointer; font-family:"Space Grotesk"; font-weight:600}
+  .confi button[aria-pressed=true]{background:var(--teal); color:#fff; border-color:var(--teal)}
+
+  footer{max-width:1000px; margin:0 auto; padding:24px 18px 50px; color:var(--ink-soft); font-size:.85rem}
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="band-inner">
+    <p class="eyebrow">Year 6 Spelling · Word Detectives · Lesson 3</p>
+    <h1>The Final Sweep</h1>
+    <p class="hook">Three days of clues come together. Recall the journey words at speed, hunt down hidden spelling errors, write the scene — then crack the weekly test.</p>
+    <div class="meta-row" aria-label="Lesson details">
+      <span>Novel Study: Boy Overboard</span>
+      <span>Apply + weekly test</span>
+      <span>AC9E6LY08 · AC9E6LY09</span>
+      <span>20 minutes</span>
+    </div>
+  </div>
+</header>
+
+<nav class="pills" aria-label="Jump to a section">
+  <div class="pills-inner">
+    <a class="pill" href="#sprint">Memory Sprint</a>
+    <a class="pill" href="#recap">Strategy Recap</a>
+    <a class="pill" href="#errors">Error Detective</a>
+    <a class="pill" href="#scene">Build the Scene</a>
+    <a class="pill" href="#test">The Weekly Test</a>
+    <a class="pill" href="#closed">Case Closed</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 1. MEMORY SPRINT -->
+  <section id="sprint">
+    <div class="sec-head"><span class="sec-no">01</span><div><h2>Memory Sprint</h2><p class="lead">30 seconds on the clock. Type every focus word you can remember — spelling counts. When the buzzer goes, reveal the list and tick the ones you nailed.</p></div></div>
+
+    <div class="card">
+      <div class="sprint-top">
+        <span class="timer" id="timer" aria-live="off">0:30</span>
+        <div class="sprint-bar" aria-hidden="true"><div class="sprint-fill" id="sprintFill"></div></div>
+        <button class="btn amber" id="sprintStart">Start the sprint ▶</button>
+      </div>
+      <label for="sprintBox" class="sr-only">Type the words you remember</label>
+      <textarea id="sprintBox" placeholder="Press start, then type words separated by spaces or new lines…" style="margin-top:14px" disabled></textarea>
+
+      <div id="recallReveal" style="display:none">
+        <p style="font-weight:700;margin-top:14px">Tick each word you spelled correctly:</p>
+        <div class="recall-grid" id="recallGrid"></div>
+        <p class="scene-count" id="recallScore" style="margin-top:10px"></p>
+      </div>
+
+      <div class="evidence" style="margin-bottom:0">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8930c" d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+        <div><b>Screenshot before you close.</b> Nothing here saves. Snap your sprint result and upload to OneNote.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. STRATEGY RECAP -->
+  <section id="recap">
+    <div class="sec-head"><span class="sec-no">02</span><div><h2>Strategy Recap</h2><p class="lead">Your three detective tools from this week — keep them in mind for the sweep and the test.</p></div></div>
+    <div class="teach-grid">
+      <div class="card teach">
+        <h3>Base + suffix</h3>
+        <p>Find the base word, add the suffix: danger → danger<b>ous</b>, free → free<b>dom</b>, surviv(e) → surviv<b>al</b>.</p>
+        <div class="remember"><b>Remember:</b> some bases change — survive <b>drops the e</b>.</div>
+      </div>
+      <div class="card teach">
+        <h3>Soft c &amp; g</h3>
+        <p>c and g go <b>soft</b> before <b>e, i, y</b>: refu<b>g</b>ee, coura<b>g</b>eous, asylum’s soft sounds.</p>
+        <div class="remember"><b>Remember:</b> keep the e in coura<b>ge</b>ous to hold the soft g.</div>
+      </div>
+      <div class="card teach">
+        <h3>Tricky &amp; silent bits</h3>
+        <p>Watch the traps: the double-e in refug<b>ee</b>, the <b>sy</b> in a<b>sy</b>lum, the schwa in desp<b>e</b>rate.</p>
+        <div class="remember"><b>Remember:</b> say tricky words slowly, sound out every part.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ERROR DETECTIVE -->
+  <section id="errors">
+    <div class="sec-head"><span class="sec-no">03</span><div><h2>Error Detective</h2><p class="lead">This case file has <b>5 hidden spelling errors</b> in the focus words. Tap every word you think is wrong, then run <b>Check my sweep</b> to see how many you caught.</p></div></div>
+
+    <div class="card">
+      <div class="passage" id="passage" aria-label="Tap the misspelled words"></div>
+      <div class="test-row">
+        <button class="btn amber" id="sweepBtn" disabled>Check my sweep 🔍</button>
+        <span class="scene-count" id="sweepMsg" role="status" aria-live="polite"></span>
+      </div>
+      <div class="corrections" id="corrections"><b>The corrections:</b><br><span id="corrList"></span></div>
+    </div>
+
+    <div class="evidence">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8930c" d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+      <div><b>Screenshot your corrected file.</b> Show every error fixed, then upload to OneNote.</div>
+    </div>
+  </section>
+
+  <!-- 4. BUILD THE SCENE -->
+  <section id="scene">
+    <div class="sec-head"><span class="sec-no">04</span><div><h2>Build the Scene</h2><p class="lead">Write 2–3 sentences about a character’s journey. Use at least <b>three</b> focus words — they light up green below as you use them. Underline each one in your book.</p></div></div>
+
+    <div class="card">
+      <div class="scene-tracker" id="sceneTracker" aria-label="Focus words used"></div>
+      <p class="scene-count" id="sceneCount">0 of 8 focus words used — aim for at least 3.</p>
+      <label for="sceneBox" class="sr-only">Write your sentences</label>
+      <textarea id="sceneBox" placeholder="e.g. Desperate for safety, the refugee family began a dangerous journey…"></textarea>
+
+      <div class="test-row">
+        <button class="btn ghost" id="sceneHelp" aria-expanded="false">I need a hand ▾</button>
+        <button class="btn amber" id="sceneExampleBtn" disabled>Show a worked example 🔒</button>
+      </div>
+      <div class="help-box" id="sceneHelpBox">
+        <b>Sentence starters</b>
+        <p>• Desperate for safety, the …<br>• The journey was … but they were …<br>• More than anything, they hoped for …</p>
+      </div>
+      <div class="locked" id="sceneLock">🔒 Write at least one sentence of your own first — then the worked example unlocks.</div>
+      <div class="reveal-box" id="sceneExample">
+        <div class="remember" style="background:#fff;border:1.5px solid var(--line)">
+          <b style="color:var(--ink)">Worked example:</b><br>
+          <span style="display:block;margin-top:6px"><u>Desperate</u> for safety, the <u>refugee</u> family began a <u>dangerous</u> <u>journey</u> across the sea. Their <u>survival</u> depended on staying <u>courageous</u>, dreaming of <u>freedom</u> in a new country.</span>
+        </div>
+      </div>
+      <div class="evidence" style="margin-bottom:0">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8930c" d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+        <div><b>This box does not save.</b> When you’re happy, <b>screenshot your sentences now</b> and upload to OneNote.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THE WEEKLY TEST -->
+  <section id="test">
+    <div class="sec-head"><span class="sec-no">05</span><div><h2>The Weekly Test</h2><p class="lead">Eight sentences, one missing word each. Read it, type the word, press <b>Check</b>. It marks itself — your running score is up top.</p></div></div>
+
+    <div class="card">
+      <div class="test-stats">
+        <div><span class="lab">Score</span><span class="big" id="tScore">0</span></div>
+        <div style="flex:1 1 160px"><span class="lab" id="tProgLab">Question 1 of 8</span><div class="progress-track"><div class="progress-fill" id="tProg"></div></div></div>
+      </div>
+      <div id="testArea"></div>
+    </div>
+
+    <div class="evidence">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8930c" d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+      <div><b>Screenshot your report card.</b> Record your score out of 8 and any words to practise, then upload to OneNote.</div>
+    </div>
+  </section>
+
+  <!-- 6. CASE CLOSED -->
+  <section id="closed">
+    <div class="sec-head"><span class="sec-no">06</span><div><h2>Case Closed</h2><p class="lead">Tick your evidence, rate your confidence, capture everything.</p></div></div>
+    <div class="card">
+      <h3>Evidence to capture (screenshot or photograph)</h3>
+      <ul class="check-list">
+        <li><input type="checkbox" id="c1"><label for="c1">My Memory Sprint result</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2">My corrected Error Detective file</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3">My 2–3 sentences (focus words underlined)</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4">My Weekly Test report card (score / 8)</label></li>
+      </ul>
+      <h3 style="margin-top:18px">How confident am I with this week’s words?</h3>
+      <div class="confi" id="confi" role="group" aria-label="Confidence rating">
+        <button aria-pressed="false">Still cracking it</button>
+        <button aria-pressed="false">Getting there</button>
+        <button aria-pressed="false">Case closed ✓</button>
+      </div>
+      <div class="evidence" style="margin-top:18px;margin-bottom:0">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#e8930c" d="M4 7h3l2-2h6l2 2h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Zm8 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/></svg>
+        <div><b>Nothing here is saved.</b> Take your final screenshots now, then upload everything to OneNote.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer><p>Year 6 Spelling · Word Detectives · Lesson 3: The Final Sweep · Linked to ACARA v9 AC9E6LY08 &amp; AC9E6LY09. All content original. Works offline — no data is collected or stored.</p></footer>
+
+<div class="sr-only" id="liveRegion" aria-live="assertive" style="position:fixed;bottom:0;left:0"></div>
+
+<script>
+"use strict";
+const $=(s,el=document)=>el.querySelector(s);
+const $$=(s,el=document)=>Array.from(el.querySelectorAll(s));
+const announce=(m)=>{const r=$("#liveRegion");r.textContent="";setTimeout(()=>r.textContent=m,30);};
+const FOCUS=["refugee","asylum","journey","survival","freedom","desperate","dangerous","courageous"];
+
+/* ---------- 1. MEMORY SPRINT ---------- */
+let sprintT=null, sprintLeft=30;
+const timerEl=$("#timer"), fillEl=$("#sprintFill"), boxEl=$("#sprintBox"), startBtn=$("#sprintStart");
+function fmt(s){return "0:"+String(s).padStart(2,"0");}
+startBtn.addEventListener("click",()=>{
+  if(sprintT)return;
+  sprintLeft=30; timerEl.textContent=fmt(30); timerEl.classList.remove("low");
+  boxEl.disabled=false; boxEl.value=""; boxEl.focus();
+  $("#recallReveal").style.display="none";
+  startBtn.disabled=true; startBtn.textContent="Sprinting…";
+  fillEl.style.width="100%";
+  sprintT=setInterval(()=>{
+    sprintLeft--; timerEl.textContent=fmt(Math.max(sprintLeft,0));
+    fillEl.style.width=Math.max(sprintLeft,0)/30*100+"%";
+    if(sprintLeft<=5)timerEl.classList.add("low");
+    if(sprintLeft<=0)endSprint();
+  },1000);
+});
+function endSprint(){
+  clearInterval(sprintT); sprintT=null;
+  boxEl.disabled=true;
+  startBtn.disabled=false; startBtn.textContent="Go again ↺";
+  announce("Time! Reveal the list and tick the words you got.");
+  $("#recallReveal").style.display="block";
+  $("#recallReveal").scrollIntoView({block:"nearest"});
+}
+const recallGrid=$("#recallGrid");
+FOCUS.forEach(w=>{
+  const b=document.createElement("button");b.type="button";b.className="recall-chip";b.setAttribute("aria-pressed","false");
+  b.innerHTML='<span class="box" aria-hidden="true"></span>'+w;
+  b.addEventListener("click",()=>{
+    const on=b.getAttribute("aria-pressed")==="true";b.setAttribute("aria-pressed",on?"false":"true");
+    const got=$$("#recallGrid .recall-chip[aria-pressed=true]").length;
+    $("#recallScore").textContent="You recalled "+got+" of 8 words correctly.";
+  });
+  recallGrid.appendChild(b);
+});
+
+/* ---------- 3. ERROR DETECTIVE ---------- */
+// passage tokens; errors map index -> correction
+const PASSAGE="Jamal was a refugy who had left his home behind . The jorney across the sea was long and dangerous . His family felt desparate , but they never lost hope . They stayed corageous through every storm , clinging to their survivel and the chance to seek asylum .";
+const ERRORS={ "refugy":"refugee", "jorney":"journey", "desparate":"desperate", "corageous":"courageous", "survivel":"survival" };
+const passEl=$("#passage");
+const tokens=PASSAGE.split(" ");
+let flagged=new Set();
+tokens.forEach((tok,i)=>{
+  if(/^[.,]$/.test(tok)){ passEl.appendChild(document.createTextNode(tok+" ")); return; }
+  const b=document.createElement("button");b.type="button";b.className="token";b.textContent=tok;b.dataset.i=i;
+  b.addEventListener("click",()=>{
+    if(passEl.dataset.done)return;
+    const on=b.classList.toggle("flag");
+    if(on)flagged.add(i);else flagged.delete(i);
+    $("#sweepBtn").disabled=flagged.size===0;
+  });
+  passEl.appendChild(b);passEl.appendChild(document.createTextNode(" "));
+});
+$("#sweepBtn").addEventListener("click",()=>{
+  if(passEl.dataset.done)return;passEl.dataset.done="1";
+  let found=0;const corr=[];
+  $$(".token",passEl).forEach(b=>{
+    const word=b.textContent;
+    if(ERRORS[word]){
+      b.classList.remove("flag");
+      if(flagged.has(+b.dataset.i)){ b.classList.add("fixed"); b.textContent=ERRORS[word]; found++; }
+      else { b.classList.add("err"); }
+      corr.push('<span class="corr-item"><s>'+word+'</s> → '+ERRORS[word]+'</span>');
+    }else if(b.classList.contains("flag")){
+      b.classList.remove("flag"); // flagged but actually correct — just unflag quietly
+    }
+  });
+  $("#sweepMsg").textContent="You caught "+found+" of 5 hidden errors. Red = missed, green = fixed.";
+  $("#corrList").innerHTML=corr.join("");
+  $("#corrections").classList.add("show");
+  $("#sweepBtn").disabled=true;
+  announce("Sweep complete. You caught "+found+" of 5 errors.");
+});
+
+/* ---------- 4. BUILD THE SCENE ---------- */
+const sceneTracker=$("#sceneTracker"), sceneBox=$("#sceneBox");
+FOCUS.forEach(w=>{const c=document.createElement("span");c.className="chip";c.dataset.w=w;c.textContent=w;sceneTracker.appendChild(c);});
+sceneBox.addEventListener("input",()=>{
+  const text=" "+sceneBox.value.toLowerCase()+" ";
+  let used=0;
+  FOCUS.forEach(w=>{
+    const re=new RegExp("\\b"+w+"\\b","i");
+    const chip=$('.chip[data-w="'+w+'"]',sceneTracker);
+    if(re.test(text)){chip.classList.add("used");used++;}else chip.classList.remove("used");
+  });
+  const cnt=$("#sceneCount");
+  cnt.textContent=used+" of 8 focus words used"+(used>=3?" — target met! ✓":" — aim for at least 3.");
+  cnt.classList.toggle("met",used>=3);
+  // unlock example after a real attempt
+  if(sceneBox.value.trim().length>=15){$("#sceneExampleBtn").disabled=false;$("#sceneExampleBtn").textContent="Show a worked example";$("#sceneLock").style.display="none";}
+  else{$("#sceneExampleBtn").disabled=true;$("#sceneExampleBtn").textContent="Show a worked example 🔒";if(!$("#sceneExample").classList.contains("show"))$("#sceneLock").style.display="block";}
+});
+$("#sceneExampleBtn").addEventListener("click",()=>{$("#sceneExample").classList.add("show");$("#sceneLock").style.display="none";});
+$("#sceneHelp").addEventListener("click",()=>{const o=$("#sceneHelpBox").classList.toggle("show");$("#sceneHelp").setAttribute("aria-expanded",o?"true":"false");$("#sceneHelp").textContent=o?"Hide the hand ▴":"I need a hand ▾";});
+
+/* ---------- 5. WEEKLY TEST ---------- */
+const TEST=[
+ {word:"refugee",  before:"A ",                                   after:" is someone forced to leave home to find safety."},
+ {word:"asylum",   before:"The family hoped to find ",            after:" in a peaceful country."},
+ {word:"journey",  before:"Their ",                               after:" across the ocean was long and frightening."},
+ {word:"survival", before:"",                                     after:" depended on staying calm and helping each other."},
+ {word:"freedom",  before:"They dreamed of ",                     after:" and a chance to start again."},
+ {word:"desperate",before:"The ",                                 after:" passengers searched the horizon for land."},
+ {word:"dangerous",before:"Crossing the sea in a small boat was extremely ", after:"."},
+ {word:"courageous",before:"It was ",                             after:" of the children to keep their hope alive."},
+];
+let tI=0,tScore=0,tMissed=[];
+const testArea=$("#testArea");
+function renderTest(){
+  const q=TEST[tI];
+  $("#tProgLab").textContent="Question "+(tI+1)+" of "+TEST.length;
+  $("#tProg").style.width=Math.round(tI/TEST.length*100)+"%";
+  testArea.innerHTML="";
+  const card=document.createElement("div");card.className="test-card";
+  const sent=document.createElement("p");sent.className="test-sentence";
+  sent.innerHTML=esc(q.before)+'<span class="test-blank">&nbsp;</span>'+esc(q.after);
+  const row=document.createElement("div");row.className="test-row";
+  const inp=document.createElement("input");inp.className="test-input";inp.type="text";inp.autocomplete="off";inp.autocapitalize="off";inp.spellcheck=false;
+  inp.setAttribute("aria-label","Type the missing word for question "+(tI+1));inp.placeholder="type the missing word…";
+  const btn=document.createElement("button");btn.className="btn";btn.textContent="Check";
+  row.append(inp,btn);
+  const fb=document.createElement("div");fb.className="test-fb";
+  card.append(sent,row,fb);testArea.appendChild(card);
+  inp.focus();
+  function submit(){
+    if(card.dataset.done)return;
+    const val=inp.value.trim().toLowerCase();
+    if(!val){fb.textContent="Type the word first.";fb.className="test-fb bad";return;}
+    card.dataset.done="1";inp.setAttribute("disabled","");btn.textContent="Next ›";btn.classList.add("amber");
+    if(val===q.word){tScore++;fb.textContent="✓ Correct — "+q.word;fb.className="test-fb good";}
+    else{tMissed.push(q.word);fb.innerHTML="✗ Not quite. The word is <b>"+q.word+"</b>.";fb.className="test-fb bad";}
+    $("#tScore").textContent=tScore;
+    announce(val===q.word?"Correct":"Incorrect, the word is "+q.word);
+    btn.onclick=()=>{tI++;if(tI<TEST.length)renderTest();else report();};
+  }
+  btn.addEventListener("click",submit);
+  inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();if(card.dataset.done){tI++;if(tI<TEST.length)renderTest();else report();}else submit();}});
+}
+function report(){
+  $("#tProg").style.width="100%";$("#tProgLab").textContent="Complete!";
+  const pct=Math.round(tScore/TEST.length*100);
+  let line=pct===100?"Perfect score — every word nailed!":pct>=75?"Strong work — you’re at standard and beyond.":pct>=50?"Good effort — a few to practise.":"Keep going — practise these and try again.";
+  let prac=tMissed.length?'<p style="font-family:Space Grotesk;font-weight:600;margin-top:6px">Words to practise:</p><ul>'+[...new Set(tMissed)].map(w=>"<li>"+w+"</li>").join("")+"</ul>":'<p style="margin-top:6px">No words to re-practise. 🎉</p>';
+  testArea.innerHTML='<div class="report"><div class="big">'+tScore+' / '+TEST.length+'</div><p class="lead" style="margin:4px auto">'+line+'</p>'+prac+'<button class="btn amber" id="tAgain" style="margin-top:10px">Retake the test ↺</button></div>';
+  $("#tAgain").addEventListener("click",()=>{tI=0;tScore=0;tMissed=[];$("#tScore").textContent=0;renderTest();});
+}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+renderTest();
+
+/* ---------- 6. CONFIDENCE ---------- */
+$$("#confi button").forEach(b=>b.addEventListener("click",()=>{$$("#confi button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");}));
+</script>
+</body>
+</html>
